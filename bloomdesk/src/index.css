@@ -1,0 +1,25 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #f5f0e8;
+  --surface: #fffef9;
+  --border: #ddd5c5;
+  --green: #4a9768;
+  --green-light: #7ec8a0;
+  --green-xlight: #e8f5ee;
+  --brown: #7a5230;
+  --water: #4fa8d5;
+  --text: #2d2218;
+  --text-muted: #8a7360;
+  --shadow: 0 2px 12px rgba(0,0,0,0.08);
+  font-family: system-ui, 'Segoe UI', sans-serif;
+  font-size: 15px;
+  color: var(--text);
+  background: var(--bg);
+}
+
+body { min-height: 100vh; background: var(--bg); }
+
+button { cursor: pointer; border: none; font-family: inherit; }
+input  { font-family: inherit; }
+h1,h2,h3 { font-weight: 600; line-height: 1.2; }
