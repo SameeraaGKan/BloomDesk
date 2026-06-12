@@ -80,44 +80,23 @@ export default function LandingPage() {
         </div>
 
         <div className="hero-visual">
-          {/* SVG filter for the hero water caustic preview */}
-          <svg style={{ position: 'absolute', width: 0, height: 0 }}>
-            <defs>
-              <filter id="wc-hero" x="-5%" y="-5%" width="110%" height="110%" colorInterpolationFilters="sRGB">
-                <feTurbulence type="turbulence" baseFrequency="0.022 0.038" numOctaves="3" seed="3" result="turb">
-                  <animate
-                    attributeName="baseFrequency"
-                    values="0.022 0.038;0.026 0.032;0.019 0.042;0.022 0.038"
-                    dur="9s"
-                    repeatCount="indefinite"
-                  />
-                </feTurbulence>
-                <feColorMatrix
-                  in="turb"
-                  type="matrix"
-                  values="0 0 0 0 0.15
-                          0 0 0 0 0.88
-                          0 0 0 0 1
-                          28 0 0 0 -12"
-                />
-              </filter>
-            </defs>
-          </svg>
-
-          <div className="hero-visuals-stack">
-            {/* Live water caustic pool */}
-            <div className="hero-water-pool">
-              <div className="hero-pool-caustic" />
-              <p className="hero-pool-label">🌊 take a break</p>
+          <div className="lifecycle-wrap">
+            <div className="lifecycle-track">
+              {[
+                { emoji: '🌱', label: 'Start',     sub: '1 session'   },
+                { emoji: '🌿', label: 'Growing',   sub: '5 sessions'  },
+                { emoji: '🌲', label: 'Thriving',  sub: '10 sessions' },
+                { emoji: '🌳', label: 'Blooming',  sub: '15 sessions' },
+              ].map((stage, i) => (
+                <div key={i} className={`lc-stage lc-s${i}`}>
+                  <div className="lc-plant">{stage.emoji}</div>
+                  <span className="lc-label">{stage.label}</span>
+                  <span className="lc-sub">{stage.sub}</span>
+                </div>
+              ))}
+              <div className="lc-line" />
             </div>
-
-            {/* Floating plant */}
-            <div className="hero-plant-wrap">
-              <span className="hero-plant">🌳</span>
-              <div className="hero-ring r1" />
-              <div className="hero-ring r2" />
-              <div className="hero-ring r3" />
-            </div>
+            <p className="lifecycle-caption">every session grows your garden</p>
           </div>
         </div>
       </section>
