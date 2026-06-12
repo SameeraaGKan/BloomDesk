@@ -7,22 +7,17 @@ export default function Stats({ sessions, water, totalMinutes, nextPet, currentS
     <div className="card stats-card">
       <h3 className="card-title">Your Stats</h3>
       <div className="stat-list">
-        {currentStreak > 0 && (
-          <div className="stat-row streak-row">
-            <span className="stat-icon">🔥</span>
-            <span className="stat-label">
-              Current streak
-              {longestStreak > currentStreak && (
-                <span className="streak-best"> · best {longestStreak}</span>
-              )}
-            </span>
-            <span className="stat-val streak-val">{currentStreak} day{currentStreak !== 1 ? 's' : ''}</span>
-          </div>
-        )}
-        <div className="stat-row">
-          <span className="stat-icon">⏱</span>
-          <span className="stat-label">Sessions</span>
-          <span className="stat-val">{sessions}</span>
+        <div className={`stat-row${currentStreak > 0 ? ' streak-row' : ''}`}>
+          <span className="stat-icon">🔥</span>
+          <span className="stat-label">
+            Streak
+            {longestStreak > currentStreak && currentStreak > 0 && (
+              <span className="streak-best"> · best {longestStreak}</span>
+            )}
+          </span>
+          <span className={`stat-val${currentStreak > 0 ? ' streak-val' : ''}`}>
+            {currentStreak > 0 ? `${currentStreak} day${currentStreak !== 1 ? 's' : ''}` : '—'}
+          </span>
         </div>
         <div className="stat-row">
           <span className="stat-icon">💧</span>
