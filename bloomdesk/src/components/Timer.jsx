@@ -149,8 +149,8 @@ export default function Timer({ onSessionComplete, onWorkingChange, onElapsedCha
               placeholder="?"
               value={customVal}
               onChange={e => setCustomVal(e.target.value)}
-              onKeyDown={e => e.key === 'Enter' && applyCustom(customVal)}
-              onBlur={() => applyCustom(customVal)}
+              onKeyDown={e => e.key === 'Enter' && applyCustom(e.target.value)}
+              onBlur={e => applyCustom(e.target.value)}
             />
           </div>
         </div>
