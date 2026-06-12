@@ -1,10 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
-import Groq from 'groq-sdk'
 
-const API_KEY = import.meta.env.VITE_GROQ_API_KEY
-const MODEL = 'llama-3.1-8b-instant'
-
-const SYSTEM = `You are Bloom Buddy — a witty, warm, slightly-quirky wellness companion living inside BloomDesk, a cozy garden productivity app. You have a distinct voice: playful but grounded, enthusiastic without being annoying, and genuinely caring.
+const MODEL_SYSTEM = `You are Bloom Buddy — a witty, warm, slightly-quirky wellness companion living inside BloomDesk, a cozy garden productivity app. You have a distinct voice: playful but grounded, enthusiastic without being annoying, and genuinely caring.
 
 Rules:
 - Keep every response to 2-3 sentences MAX. Never longer.
@@ -14,9 +10,20 @@ Rules:
 - Occasionally be funny or surprising. You're allowed to have opinions.
 - Never start a response with "Of course" or "Great question".`
 
-function makeClient() {
-  if (!API_KEY) return null
-  return new Groq({ apiKey: API_KEY, dangerouslyAllowBrowser: true })
+async function callProxy(apiHistory) {
+  const resp = await fetch('/api/chat', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      messages: [
+        { role: 'system', content: MODEL_SYSTEM },
+        ...apiHistory.slice(-10),
+      ],
+    }),
+  })
+  if (!resp.ok) throw new Error('proxy error')
+  const data = await resp.json()
+  return data.content
 }
 
 export default function WellnessAgent({ sessions, totalMinutes, justFinishedSession }) {
@@ -27,26 +34,16 @@ export default function WellnessAgent({ sessions, totalMinutes, justFinishedSess
   const scrollRef = useRef(null)
 
   useEffect(() => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollTop = scrollRef.current.scrollHeight
-    }
+    if (scrollRef.current) scrollRef.current.scrollTop = scrollRef.current.scrollHeight
   }, [messages, loading])
 
   useEffect(() => {
-    if (justFinishedSession > 0 && API_KEY) autoBreakTip()
+    if (justFinishedSession > 0) autoBreakTip()
   }, [justFinishedSession])
 
   async function callApi(userContent) {
     const next = [...apiHistory, { role: 'user', content: userContent }]
-    const resp = await makeClient().chat.completions.create({
-      model: MODEL,
-      max_tokens: 160,
-      messages: [
-        { role: 'system', content: SYSTEM },
-        ...next.slice(-10),
-      ]
-    })
-    const reply = resp.choices[0].message.content.trim()
+    const reply = await callProxy(next)
     setApiHistory([...next, { role: 'assistant', content: reply }])
     return reply
   }
@@ -59,7 +56,7 @@ export default function WellnessAgent({ sessions, totalMinutes, justFinishedSess
       const reply = await callApi(prompt)
       setMessages(prev => [...prev, { role: 'buddy', text: reply }])
     } catch {
-      setMessages(prev => [...prev, { role: 'buddy', text: 'Solid session! Your plant just had a drink — now it\'s your turn. Step away for a few minutes.' }])
+      setMessages(prev => [...prev, { role: 'buddy', text: "Solid session! Step away for a few minutes — your plant is proud of you." }])
     }
     setLoading(false)
   }
@@ -89,28 +86,6 @@ export default function WellnessAgent({ sessions, totalMinutes, justFinishedSess
     'Eye rest exercise',
     'How do I beat afternoon slump?',
   ]
-
-  if (!API_KEY) {
-    return (
-      <div className="card agent-card">
-        <div className="agent-top">
-          <span className="agent-title">🌿 Bloom Buddy</span>
-        </div>
-        <div className="agent-messages" ref={scrollRef}>
-          <div className="agent-empty">
-            <span className="agent-empty-icon">🔑</span>
-            <p>Add <code>VITE_GROQ_API_KEY</code> to <code>.env</code> to wake me up.</p>
-          </div>
-        </div>
-        <div className="agent-bottom">
-          <form className="agent-chat" onSubmit={e => e.preventDefault()}>
-            <input className="chat-input" placeholder="Set up API key to chat…" disabled />
-            <button className="chat-send" disabled>→</button>
-          </form>
-        </div>
-      </div>
-    )
-  }
 
   return (
     <div className="card agent-card">
