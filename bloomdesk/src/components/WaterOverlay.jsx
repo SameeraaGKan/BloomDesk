@@ -16,20 +16,48 @@ export default function WaterOverlay({ elapsed, isWorking }) {
   const restless = mins >= 25
 
   return (
-    <div
-      className={[
-        'water-overlay',
-        restless && 'water-restless',
-        desperate && 'water-desperate',
-      ].filter(Boolean).join(' ')}
-      style={{ '--r': radius, '--intensity': intensity.toFixed(3) }}
-      aria-hidden="true"
-    >
-      <div className="water-shimmer" />
-      <div className="water-ripple wr1" />
-      <div className="water-ripple wr2" />
-      <div className="water-ripple wr3" />
-      {desperate && <p className="water-demand">🌊 take a break</p>}
-    </div>
+    <>
+      <svg style={{ position: 'fixed', width: 0, height: 0, overflow: 'hidden' }} aria-hidden="true">
+        <defs>
+          <filter id="wc" x="-5%" y="-5%" width="110%" height="110%" colorInterpolationFilters="sRGB">
+            <feTurbulence
+              type="turbulence"
+              baseFrequency="0.015 0.025"
+              numOctaves="3"
+              seed="7"
+              result="turb"
+            >
+              <animate
+                attributeName="baseFrequency"
+                values="0.015 0.025;0.019 0.021;0.013 0.029;0.017 0.023;0.015 0.025"
+                dur="13s"
+                repeatCount="indefinite"
+              />
+            </feTurbulence>
+            <feColorMatrix
+              in="turb"
+              type="matrix"
+              values="0 0 0 0 0.15
+                      0 0 0 0 0.88
+                      0 0 0 0 1
+                      28 0 0 0 -12"
+            />
+          </filter>
+        </defs>
+      </svg>
+
+      <div
+        className={[
+          'water-overlay',
+          restless && 'water-restless',
+          desperate && 'water-desperate',
+        ].filter(Boolean).join(' ')}
+        style={{ '--r': radius, '--intensity': intensity.toFixed(3) }}
+        aria-hidden="true"
+      >
+        <div className="water-caustics" />
+        {desperate && <p className="water-demand">🌊 take a break</p>}
+      </div>
+    </>
   )
 }
