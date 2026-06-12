@@ -206,12 +206,12 @@
   position: relative;
   display: flex;
   align-items: flex-end;
-  gap: 2.75rem;
+  gap: 3.5rem;
 }
 
 .lc-line {
   position: absolute;
-  bottom: 3.8rem;
+  bottom: 5rem;
   left: 2rem;
   right: 2rem;
   height: 2px;
@@ -250,15 +250,15 @@
   animation: lc-bob ease-in-out infinite;
   line-height: 1;
 }
-.lc-s0 .lc-plant { font-size: 2.2rem;  animation-duration: 3.8s; animation-delay: 0s;    }
-.lc-s1 .lc-plant { font-size: 3rem;    animation-duration: 4.2s; animation-delay: -0.9s; }
-.lc-s2 .lc-plant { font-size: 4rem;    animation-duration: 3.5s; animation-delay: -1.8s; }
-.lc-s3 .lc-plant { font-size: 5.5rem;  animation-duration: 4.8s; animation-delay: -0.5s;
-  filter: drop-shadow(0 0 24px rgba(90, 158, 111, 0.7)); }
+.lc-s0 .lc-plant { font-size: 3.5rem;  animation-duration: 3.8s; animation-delay: 0s;    }
+.lc-s1 .lc-plant { font-size: 5rem;    animation-duration: 4.2s; animation-delay: -0.9s; }
+.lc-s2 .lc-plant { font-size: 7rem;    animation-duration: 3.5s; animation-delay: -1.8s; }
+.lc-s3 .lc-plant { font-size: 9.5rem;  animation-duration: 4.8s; animation-delay: -0.5s;
+  filter: drop-shadow(0 0 32px rgba(90, 158, 111, 0.75)); }
 
 @keyframes lc-bob {
   0%, 100% { transform: translateY(0px); }
-  50%       { transform: translateY(-10px); }
+  50%       { transform: translateY(-16px); }
 }
 
 .lc-label {
