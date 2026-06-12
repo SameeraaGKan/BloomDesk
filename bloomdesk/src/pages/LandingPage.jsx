@@ -58,26 +58,6 @@ export default function LandingPage() {
           <div className="hero-orb orb3" />
         </div>
 
-        <div className="hero-visual">
-          <div className="lifecycle-wrap">
-            <div className="lifecycle-track">
-              {[
-                { emoji: '🌱', label: 'Start',     sub: '1 session'   },
-                { emoji: '🌿', label: 'Growing',   sub: '5 sessions'  },
-                { emoji: '🌲', label: 'Thriving',  sub: '10 sessions' },
-                { emoji: '🌳', label: 'Blooming',  sub: '15 sessions' },
-              ].map((stage, i) => (
-                <div key={i} className={`lc-stage lc-s${i}`}>
-                  <div className="lc-plant">{stage.emoji}</div>
-                  <span className="lc-label">{stage.label}</span>
-                  <span className="lc-sub">{stage.sub}</span>
-                </div>
-              ))}
-              <div className="lc-line" />
-            </div>
-          </div>
-        </div>
-
         <div className="land-hero-content">
           <div className="hero-badge">🌱 your garden grows with your focus</div>
           <h1 className="hero-title">
@@ -96,6 +76,26 @@ export default function LandingPage() {
             <button className="btn-hero-ghost" onClick={openSignin}>
               I have an account
             </button>
+          </div>
+        </div>
+
+        <div className="hero-visual">
+          <div className="lifecycle-wrap">
+            <div className="lifecycle-track">
+              {[
+                { emoji: '🌱', label: 'Start',     sub: '1 session'   },
+                { emoji: '🌿', label: 'Growing',   sub: '5 sessions'  },
+                { emoji: '🌲', label: 'Thriving',  sub: '10 sessions' },
+                { emoji: '🌳', label: 'Blooming',  sub: '15 sessions' },
+              ].map((stage, i) => (
+                <div key={i} className={`lc-stage lc-s${i}`}>
+                  <div className="lc-plant">{stage.emoji}</div>
+                  <span className="lc-label">{stage.label}</span>
+                  <span className="lc-sub">{stage.sub}</span>
+                </div>
+              ))}
+              <div className="lc-line" />
+            </div>
           </div>
         </div>
       </section>
