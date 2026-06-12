@@ -199,21 +199,21 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1.25rem;
+  gap: 2rem;
 }
 
 .lifecycle-track {
   position: relative;
   display: flex;
   align-items: flex-end;
-  gap: 1.5rem;
+  gap: 2.75rem;
 }
 
 .lc-line {
   position: absolute;
-  bottom: 2.8rem;
-  left: 1.5rem;
-  right: 1.5rem;
+  bottom: 3.8rem;
+  left: 2rem;
+  right: 2rem;
   height: 2px;
   background: linear-gradient(90deg,
     rgba(90, 158, 111, 0.25) 0%,
@@ -227,7 +227,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.3rem;
+  gap: 0.5rem;
   position: relative;
   z-index: 1;
   animation: lc-rise 0.7s ease-out both;
@@ -238,7 +238,7 @@
 .lc-s3 { animation-delay: 0.55s; }
 
 @keyframes lc-rise {
-  from { opacity: 0; transform: translateY(14px); }
+  from { opacity: 0; transform: translateY(18px); }
   to   { opacity: 1; transform: translateY(0); }
 }
 
@@ -246,23 +246,23 @@
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  filter: drop-shadow(0 0 10px rgba(90, 158, 111, 0.4));
+  filter: drop-shadow(0 0 12px rgba(90, 158, 111, 0.4));
   animation: lc-bob ease-in-out infinite;
   line-height: 1;
 }
-.lc-s0 .lc-plant { font-size: 1.5rem; animation-duration: 3.8s; animation-delay: 0s;    }
-.lc-s1 .lc-plant { font-size: 2rem;   animation-duration: 4.2s; animation-delay: -0.9s; }
-.lc-s2 .lc-plant { font-size: 2.7rem; animation-duration: 3.5s; animation-delay: -1.8s; }
-.lc-s3 .lc-plant { font-size: 3.5rem; animation-duration: 4.8s; animation-delay: -0.5s;
-  filter: drop-shadow(0 0 18px rgba(90, 158, 111, 0.65)); }
+.lc-s0 .lc-plant { font-size: 2.2rem;  animation-duration: 3.8s; animation-delay: 0s;    }
+.lc-s1 .lc-plant { font-size: 3rem;    animation-duration: 4.2s; animation-delay: -0.9s; }
+.lc-s2 .lc-plant { font-size: 4rem;    animation-duration: 3.5s; animation-delay: -1.8s; }
+.lc-s3 .lc-plant { font-size: 5.5rem;  animation-duration: 4.8s; animation-delay: -0.5s;
+  filter: drop-shadow(0 0 24px rgba(90, 158, 111, 0.7)); }
 
 @keyframes lc-bob {
   0%, 100% { transform: translateY(0px); }
-  50%       { transform: translateY(-7px); }
+  50%       { transform: translateY(-10px); }
 }
 
 .lc-label {
-  font-size: 0.7rem;
+  font-size: 0.8rem;
   font-weight: 700;
   color: rgba(167, 243, 192, 0.9);
   letter-spacing: 0.04em;
@@ -271,13 +271,13 @@
 }
 
 .lc-sub {
-  font-size: 0.65rem;
+  font-size: 0.72rem;
   color: rgba(167, 243, 192, 0.45);
   white-space: nowrap;
 }
 
 .lifecycle-caption {
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   color: rgba(167, 243, 192, 0.5);
   font-style: italic;
   margin: 0;
