@@ -6,6 +6,7 @@ import PetGarden from './components/PetGarden'
 import Stats from './components/Stats'
 import WellnessAgent from './components/WellnessAgent'
 import WaterOverlay from './components/WaterOverlay'
+import Fireflies from './components/Fireflies'
 import { useAuth } from './contexts/AuthContext'
 import { supabase } from './lib/supabase'
 import './App.css'
@@ -170,6 +171,7 @@ export default function App() {
 
   return (
     <div className="app">
+      <Fireflies />
       <header className="app-header">
         <div className="header-top">
           <div className="header-title">

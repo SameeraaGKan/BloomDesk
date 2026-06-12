@@ -101,7 +101,7 @@ export default function Timer({ onSessionComplete, onWorkingChange, onElapsedCha
 
       <div className="ring-wrap">
         <svg width="180" height="180" viewBox="0 0 180 180">
-          <circle cx="90" cy="90" r={RADIUS} fill="none" stroke="#e8e0d5" strokeWidth="10" />
+          <circle cx="90" cy="90" r={RADIUS} fill="none" stroke="rgba(90,158,111,0.2)" strokeWidth="10" />
           <circle
             cx="90" cy="90" r={RADIUS}
             fill="none"

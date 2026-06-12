@@ -1,21 +1,21 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --surface: rgba(255, 255, 255, 0.55);
-  --border: rgba(255, 255, 255, 0.72);
-  --green: #059669;
-  --green-light: #34d399;
-  --green-xlight: rgba(52, 211, 153, 0.14);
-  --purple: #7c3aed;
-  --purple-light: #a78bfa;
-  --purple-xlight: rgba(167, 139, 250, 0.15);
-  --pink: #db2777;
-  --pink-light: #f9a8d4;
+  --surface: rgba(12, 30, 17, 0.72);
+  --border: rgba(90, 158, 111, 0.22);
+  --green: #5a9e6f;
+  --green-light: #86efac;
+  --green-xlight: rgba(90, 158, 111, 0.14);
+  --purple: #5a9e6f;
+  --purple-light: #86efac;
+  --purple-xlight: rgba(90, 158, 111, 0.14);
+  --pink: #34d399;
+  --pink-light: #a7f3c0;
   --water: #38bdf8;
-  --text: #2d1b69;
-  --text-muted: #7c6fa0;
-  --shadow: 0 8px 32px rgba(124, 58, 237, 0.1), 0 2px 8px rgba(0,0,0,0.05);
-  --glass-shadow: 0 8px 32px rgba(124, 58, 237, 0.12), inset 0 1px 0 rgba(255,255,255,0.9);
+  --text: #e8f5ea;
+  --text-muted: rgba(200, 230, 210, 0.55);
+  --shadow: 0 8px 32px rgba(0, 0, 0, 0.45), 0 2px 8px rgba(0,0,0,0.25);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(90, 158, 111, 0.12);
 
   font-family: 'Nunito', system-ui, sans-serif;
   font-size: 15px;
@@ -24,7 +24,7 @@
 
 body {
   min-height: 100vh;
-  background: linear-gradient(-45deg, #ede9fe, #fce7f3, #e0f2fe, #d1fae5);
+  background: linear-gradient(-45deg, #0b1f10, #060e08, #0d2016, #05100a);
   background-size: 400% 400%;
   animation: dreamGradient 20s ease infinite;
 }
