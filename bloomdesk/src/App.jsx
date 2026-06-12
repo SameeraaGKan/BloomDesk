@@ -141,6 +141,9 @@ export default function App() {
 
       <footer className="app-footer">
         <button className="reset-link" onClick={onReset}>reset garden</button>
+        <p className="footer-copy">
+          © {new Date().getFullYear()} <a href="https://sameeraagkan.github.io/" target="_blank" rel="noreferrer" className="footer-link">Sameeraa GKan</a>
+        </p>
       </footer>
     </div>
   )
