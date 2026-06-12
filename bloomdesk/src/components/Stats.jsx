@@ -1,12 +1,24 @@
-export default function Stats({ sessions, water, totalMinutes, nextPet }) {
+export default function Stats({ sessions, water, totalMinutes, nextPet, currentStreak, longestStreak }) {
   const hours = Math.floor(totalMinutes / 60)
   const mins = totalMinutes % 60
   const timeStr = hours > 0 ? `${hours}h ${mins}m` : `${mins}m`
 
   return (
     <div className="card stats-card">
-      <h3 className="card-title">Today's Stats</h3>
+      <h3 className="card-title">Your Stats</h3>
       <div className="stat-list">
+        {currentStreak > 0 && (
+          <div className="stat-row streak-row">
+            <span className="stat-icon">🔥</span>
+            <span className="stat-label">
+              Current streak
+              {longestStreak > currentStreak && (
+                <span className="streak-best"> · best {longestStreak}</span>
+              )}
+            </span>
+            <span className="stat-val streak-val">{currentStreak} day{currentStreak !== 1 ? 's' : ''}</span>
+          </div>
+        )}
         <div className="stat-row">
           <span className="stat-icon">⏱</span>
           <span className="stat-label">Sessions</span>
