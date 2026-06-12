@@ -4,6 +4,7 @@ import Plant from './components/Plant'
 import PetGarden from './components/PetGarden'
 import Stats from './components/Stats'
 import WellnessAgent from './components/WellnessAgent'
+import WaterOverlay from './components/WaterOverlay'
 import './App.css'
 
 const INITIAL_STATE = {
@@ -34,6 +35,7 @@ export default function App() {
   const [state, setState] = useState(loadState)
   const [notification, setNotification] = useState(null)
   const [isWorking, setIsWorking] = useState(false)
+  const [sessionElapsed, setSessionElapsed] = useState(0)
   const [justWatered, setJustWatered] = useState(false)
   const [justFinished, setJustFinished] = useState(0)
   const notifTimer = useRef(null)
@@ -105,7 +107,7 @@ export default function App() {
 
       <main className="main-grid">
         <section className="cell-timer">
-          <Timer onSessionComplete={onSessionComplete} onWorkingChange={setIsWorking} />
+          <Timer onSessionComplete={onSessionComplete} onWorkingChange={setIsWorking} onElapsedChange={setSessionElapsed} />
         </section>
 
         <section className="cell-plant">
@@ -138,6 +140,8 @@ export default function App() {
           />
         </section>
       </main>
+
+      <WaterOverlay elapsed={sessionElapsed} isWorking={isWorking} />
 
       <footer className="app-footer">
         <button className="reset-link" onClick={onReset}>reset garden</button>

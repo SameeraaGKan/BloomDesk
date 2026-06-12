@@ -11,7 +11,7 @@ const BREAK_PRESETS = [5, 10, 15, 20]
 const RADIUS = 72
 const CIRCUMFERENCE = 2 * Math.PI * RADIUS
 
-export default function Timer({ onSessionComplete, onWorkingChange }) {
+export default function Timer({ onSessionComplete, onWorkingChange, onElapsedChange }) {
   const [mode, setMode]           = useState('work')
   const [duration, setDuration]   = useState(MODES.work.defaultMins * 60)
   const [secondsLeft, setSeconds] = useState(MODES.work.defaultMins * 60)
@@ -22,6 +22,10 @@ export default function Timer({ onSessionComplete, onWorkingChange }) {
   useEffect(() => {
     onWorkingChange?.(running && mode === 'work')
   }, [running, mode])
+
+  useEffect(() => {
+    onElapsedChange?.(running && mode === 'work' ? duration - secondsLeft : 0)
+  }, [secondsLeft, running, mode])
 
   useEffect(() => {
     if (!running) return

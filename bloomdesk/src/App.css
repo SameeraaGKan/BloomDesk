@@ -821,6 +821,108 @@
 .chat-send:active:not(:disabled) { transform: scale(0.95); }
 .chat-send:disabled { opacity: 0.35; cursor: not-allowed; }
 
+/* ── Water Overlay ───────────────────────────── */
+.water-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 150;
+  pointer-events: none;
+  clip-path: circle(var(--r, 0px) at 100% 100%);
+  transition: clip-path 2.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  background:
+    radial-gradient(
+      ellipse at 90% 95%,
+      rgba(125, 211, 252, 0.55) 0%,
+      rgba(14, 165, 233, 0.6) 35%,
+      rgba(2, 132, 199, 0.65) 65%,
+      rgba(7, 89, 133, 0.72) 100%
+    );
+  backdrop-filter: blur(1px);
+  -webkit-backdrop-filter: blur(1px);
+  filter: drop-shadow(-4px -4px 24px rgba(56, 189, 248, 0.5));
+}
+
+/* animated light shimmer on the water surface */
+.water-shimmer {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    130deg,
+    rgba(255, 255, 255, 0.18) 0%,
+    transparent 35%,
+    rgba(255, 255, 255, 0.08) 55%,
+    transparent 100%
+  );
+  animation: waterShimmer 5s ease-in-out infinite alternate;
+}
+
+@keyframes waterShimmer {
+  from { opacity: 0.5; transform: scale(1) rotate(0deg); }
+  to   { opacity: 1;   transform: scale(1.04) rotate(3deg); }
+}
+
+/* ripple rings expanding from the corner */
+.water-ripple {
+  position: absolute;
+  bottom: -8px;
+  right: -8px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255, 255, 255, 0.55);
+  animation: rippleExpand 3s ease-out infinite;
+}
+
+.water-ripple.wr2 { animation-delay: 1s; }
+.water-ripple.wr3 { animation-delay: 2s; }
+
+@keyframes rippleExpand {
+  from { transform: scale(1);  opacity: 0.9; }
+  to   { transform: scale(25); opacity: 0;   }
+}
+
+/* restless — ripples speed up a bit */
+.water-restless .water-ripple { animation-duration: 2.2s; }
+
+/* desperate — colour shift to deep blue + pulsing glow */
+.water-desperate {
+  background:
+    radial-gradient(
+      ellipse at 90% 95%,
+      rgba(56, 189, 248, 0.55) 0%,
+      rgba(3, 105, 161, 0.68) 40%,
+      rgba(7, 89, 133, 0.78) 100%
+    );
+  animation: desperatePulse 1.8s ease-in-out infinite;
+}
+
+@keyframes desperatePulse {
+  0%, 100% { filter: drop-shadow(-4px -4px 24px rgba(56, 189, 248, 0.5)); }
+  50%       { filter: drop-shadow(-4px -4px 48px rgba(56, 189, 248, 0.85)); }
+}
+
+.water-desperate .water-ripple { animation-duration: 1.6s; }
+
+/* "take a break" text */
+.water-demand {
+  position: absolute;
+  bottom: 38%;
+  right: 32%;
+  font-size: 1rem;
+  font-weight: 800;
+  color: rgba(255, 255, 255, 0.92);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  text-shadow: 0 2px 12px rgba(7, 89, 133, 0.8);
+  animation: demandFloat 2s ease-in-out infinite alternate;
+}
+
+@keyframes demandFloat {
+  from { transform: translateY(0px);  opacity: 0.75; }
+  to   { transform: translateY(-6px); opacity: 1; }
+}
+
 /* ── Responsive ──────────────────────────────── */
 @media (max-width: 900px) {
   .main-grid {
