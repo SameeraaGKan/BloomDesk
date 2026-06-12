@@ -36,7 +36,6 @@ export default function App() {
   const [isWorking, setIsWorking] = useState(false)
   const [justWatered, setJustWatered] = useState(false)
   const [justFinished, setJustFinished] = useState(0)
-  const [apiKey, setApiKey] = useState(() => localStorage.getItem('bloomdesk-apikey') || '')
   const notifTimer = useRef(null)
 
   useEffect(() => {
@@ -86,11 +85,6 @@ export default function App() {
     }
   }
 
-  function handleApiKeyChange(key) {
-    setApiKey(key)
-    localStorage.setItem('bloomdesk-apikey', key)
-  }
-
   const nextPet = PET_ROSTER.find(p => !state.unlockedPets.includes(p.id))
 
   return (
@@ -110,8 +104,23 @@ export default function App() {
       )}
 
       <main className="main-grid">
-        <section className="left-panel">
+        <section className="cell-timer">
           <Timer onSessionComplete={onSessionComplete} onWorkingChange={setIsWorking} />
+        </section>
+
+        <section className="cell-plant">
+          <Plant water={state.water} justWatered={justWatered} />
+        </section>
+
+        <section className="cell-buddy">
+          <WellnessAgent
+            sessions={state.sessions}
+            totalMinutes={state.totalMinutes}
+            justFinishedSession={justFinished}
+          />
+        </section>
+
+        <section className="cell-stats">
           <Stats
             sessions={state.sessions}
             water={state.water}
@@ -120,20 +129,12 @@ export default function App() {
           />
         </section>
 
-        <section className="right-panel">
-          <Plant water={state.water} justWatered={justWatered} />
+        <section className="cell-pets">
           <PetGarden
             allPets={PET_ROSTER}
             unlockedIds={state.unlockedPets}
             sessions={state.sessions}
             isWorking={isWorking}
-          />
-          <WellnessAgent
-            sessions={state.sessions}
-            totalMinutes={state.totalMinutes}
-            justFinishedSession={justFinished}
-            apiKey={apiKey}
-            onApiKeyChange={handleApiKeyChange}
           />
         </section>
       </main>

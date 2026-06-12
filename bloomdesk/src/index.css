@@ -1,25 +1,40 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --bg: #f5f0e8;
-  --surface: #fffef9;
-  --border: #ddd5c5;
-  --green: #4a9768;
-  --green-light: #7ec8a0;
-  --green-xlight: #e8f5ee;
-  --brown: #7a5230;
-  --water: #4fa8d5;
-  --text: #2d2218;
-  --text-muted: #8a7360;
-  --shadow: 0 2px 12px rgba(0,0,0,0.08);
-  font-family: system-ui, 'Segoe UI', sans-serif;
+  --surface: rgba(255, 255, 255, 0.55);
+  --border: rgba(255, 255, 255, 0.72);
+  --green: #059669;
+  --green-light: #34d399;
+  --green-xlight: rgba(52, 211, 153, 0.14);
+  --purple: #7c3aed;
+  --purple-light: #a78bfa;
+  --purple-xlight: rgba(167, 139, 250, 0.15);
+  --pink: #db2777;
+  --pink-light: #f9a8d4;
+  --water: #38bdf8;
+  --text: #2d1b69;
+  --text-muted: #7c6fa0;
+  --shadow: 0 8px 32px rgba(124, 58, 237, 0.1), 0 2px 8px rgba(0,0,0,0.05);
+  --glass-shadow: 0 8px 32px rgba(124, 58, 237, 0.12), inset 0 1px 0 rgba(255,255,255,0.9);
+
+  font-family: 'Nunito', system-ui, sans-serif;
   font-size: 15px;
   color: var(--text);
-  background: var(--bg);
 }
 
-body { min-height: 100vh; background: var(--bg); }
+body {
+  min-height: 100vh;
+  background: linear-gradient(-45deg, #ede9fe, #fce7f3, #e0f2fe, #d1fae5);
+  background-size: 400% 400%;
+  animation: dreamGradient 20s ease infinite;
+}
+
+@keyframes dreamGradient {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
 
 button { cursor: pointer; border: none; font-family: inherit; }
 input  { font-family: inherit; }
-h1,h2,h3 { font-weight: 600; line-height: 1.2; }
+h1,h2,h3 { font-weight: 700; line-height: 1.2; }

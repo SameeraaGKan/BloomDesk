@@ -7,6 +7,15 @@ const STAGES = [
   { min: 15, emoji: '🌺', name: 'Full Bloom',   sub: 'Your garden is magnificent!' },
 ]
 
+const STAGE_GLOW = [
+  'rgba(167,139,250,0.35)',
+  'rgba(52,211,153,0.35)',
+  'rgba(5,150,105,0.35)',
+  'rgba(5,150,105,0.35)',
+  'rgba(244,114,182,0.35)',
+  'rgba(251,113,133,0.38)',
+]
+
 export default function Plant({ water, justWatered }) {
   const stage = [...STAGES].reverse().find(s => water >= s.min) ?? STAGES[0]
   const stageIdx = STAGES.indexOf(stage)
@@ -17,9 +26,15 @@ export default function Plant({ water, justWatered }) {
 
   return (
     <div className="card plant-card">
-      <div className={`plant-emoji-wrap ${justWatered ? 'watered' : ''}`}>
-        <div className="plant-emoji">{stage.emoji}</div>
-        {justWatered && <div className="water-splash">💧💧💧</div>}
+      <div className="plant-scene">
+        <div
+          className="plant-glow"
+          style={{ background: `radial-gradient(circle, ${STAGE_GLOW[stageIdx]} 0%, transparent 68%)` }}
+        />
+        <div className={`plant-emoji-wrap ${justWatered ? 'watered' : ''}`}>
+          <div className="plant-emoji">{stage.emoji}</div>
+          {justWatered && <div className="water-splash">💧💧💧</div>}
+        </div>
       </div>
 
       <div className="plant-info">
@@ -27,24 +42,30 @@ export default function Plant({ water, justWatered }) {
         <span className="plant-sub">{stage.sub}</span>
       </div>
 
-      {nextStage && (
+      <div className="stage-trail">
+        {STAGES.map((s, i) => (
+          <div
+            key={s.name}
+            className={`stage-dot${i < stageIdx ? ' done' : ''}${i === stageIdx ? ' current' : ''}`}
+            title={s.name}
+          >
+            {s.emoji}
+          </div>
+        ))}
+      </div>
+
+      {nextStage ? (
         <div className="plant-progress">
           <div className="prog-bar">
             <div className="prog-fill" style={{ width: `${pct}%` }} />
           </div>
           <span className="prog-label">
-            {water}/{nextStage.min} 💧 → {nextStage.name}
+            {water} / {nextStage.min} 💧 &rarr; {nextStage.emoji} {nextStage.name}
           </span>
         </div>
-      )}
-
-      {!nextStage && (
+      ) : (
         <div className="plant-maxed">🏆 Garden fully bloomed!</div>
       )}
-
-      <div className="water-count">
-        {'💧'.repeat(Math.min(water, 10))}{water > 10 ? ` +${water - 10}` : ''}
-      </div>
     </div>
   )
 }
