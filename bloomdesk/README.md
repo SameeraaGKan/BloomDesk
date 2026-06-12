@@ -2,7 +2,9 @@
 
 A cozy garden-themed productivity app where every focus session waters your plant. Built with React + Vite.
 
-![BloomDesk](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white) ![Vite](https://img.shields.io/badge/Vite-8-646CFF?logo=vite&logoColor=white) ![Groq](https://img.shields.io/badge/AI-Groq-F55036?logo=groq&logoColor=white)
+**Live:** [bloom-desk-ruby.vercel.app](https://bloom-desk-ruby.vercel.app)
+
+![BloomDesk](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white) ![Vite](https://img.shields.io/badge/Vite-8-646CFF?logo=vite&logoColor=white) ![Groq](https://img.shields.io/badge/AI-Groq-F55036?logo=groq&logoColor=white) ![Deployed on Vercel](https://img.shields.io/badge/Deployed-Vercel-000000?logo=vercel&logoColor=white)
 
 ## What it does
 
