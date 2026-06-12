@@ -63,14 +63,3 @@ bloomdesk/
 │   └── index.css              # Global tokens and body background
 └── .env                       # VITE_GROQ_API_KEY (not committed)
 ```
-
-## Deploying
-
-The app is a static Vite build. To deploy on Vercel:
-
-1. Import the GitHub repo at [vercel.com](https://vercel.com)
-2. Set **Root Directory** to `bloomdesk`
-3. Add `VITE_GROQ_API_KEY` under Environment Variables
-4. Deploy — every push to `main` auto-redeploys
-
-> **Note:** The Groq API key is embedded in the client bundle (standard for browser-only apps). Set a spend limit on your key at console.groq.com.
