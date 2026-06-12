@@ -208,20 +208,24 @@
   flex-direction: column;
   align-items: center;
   gap: 2rem;
+  width: 100%;
+  max-width: 1000px;
+  padding: 0 2rem;
 }
 
 .lifecycle-track {
   position: relative;
   display: flex;
   align-items: flex-end;
-  gap: 3.5rem;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .lc-line {
   position: absolute;
   bottom: 5rem;
-  left: 2rem;
-  right: 2rem;
+  left: 0;
+  right: 0;
   height: 2px;
   background: linear-gradient(90deg,
     rgba(90, 158, 111, 0.25) 0%,
