@@ -1198,22 +1198,22 @@
   overflow: hidden;
   height: var(--h, 0%);
   transition: height 2.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  background: rgba(0, 45, 110, 0.62);
-}
-
-.water-video {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0.48;
-  mix-blend-mode: screen;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 150, 220, 0.60) 0%,
+    rgba(0, 100, 180, 0.72) 40%,
+    rgba(0, 55, 130, 0.82) 100%
+  );
 }
 
 /* desperate — deeper colour + pulsing glow */
 .water-desperate {
-  background: rgba(0, 15, 70, 0.80);
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 100, 170, 0.70) 0%,
+    rgba(0, 40, 110, 0.82) 40%,
+    rgba(0, 10, 60, 0.90) 100%
+  );
   animation: desperate-pulse 1.8s ease-in-out infinite;
 }
 

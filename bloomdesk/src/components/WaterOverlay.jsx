@@ -47,14 +47,6 @@ export default function WaterOverlay({ elapsed, isWorking }) {
         style={{ '--h': height, '--intensity': intensity.toFixed(3) }}
         aria-hidden="true"
       >
-        <video
-          className="water-video"
-          src="/rippling_water.mp4"
-          autoPlay
-          loop
-          muted
-          playsInline
-        />
         {desperate && <p className="water-demand">🌊 take a break</p>}
       </div>
     </>
