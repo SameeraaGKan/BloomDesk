@@ -262,13 +262,23 @@
   justify-content: center;
   filter: drop-shadow(0 0 12px rgba(90, 158, 111, 0.4));
   animation: lc-bob ease-in-out infinite;
-  line-height: 1;
 }
-.lc-s0 .lc-plant { font-size: 3.5rem;  animation-duration: 3.8s; animation-delay: 0s;    }
-.lc-s1 .lc-plant { font-size: 5rem;    animation-duration: 4.2s; animation-delay: -0.9s; }
-.lc-s2 .lc-plant { font-size: 7rem;    animation-duration: 3.5s; animation-delay: -1.8s; }
-.lc-s3 .lc-plant { font-size: 9.5rem;  animation-duration: 4.8s; animation-delay: -0.5s;
+
+.lc-plant-img {
+  object-fit: contain;
+  display: block;
+}
+
+.lc-s0 .lc-plant { animation-duration: 3.8s; animation-delay: 0s;    }
+.lc-s1 .lc-plant { animation-duration: 4.2s; animation-delay: -0.9s; }
+.lc-s2 .lc-plant { animation-duration: 3.5s; animation-delay: -1.8s; }
+.lc-s3 .lc-plant { animation-duration: 4.8s; animation-delay: -0.5s;
   filter: drop-shadow(0 0 32px rgba(90, 158, 111, 0.75)); }
+
+.lc-s0 .lc-plant-img { width: 3.5rem;  height: 3.5rem;  }
+.lc-s1 .lc-plant-img { width: 5rem;    height: 5rem;    }
+.lc-s2 .lc-plant-img { width: 7rem;    height: 7rem;    }
+.lc-s3 .lc-plant-img { width: 9.5rem;  height: 9.5rem;  }
 
 @keyframes lc-bob {
   0%, 100% { transform: translateY(0px); }

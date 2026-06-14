@@ -83,13 +83,15 @@ export default function LandingPage() {
           <div className="lifecycle-wrap">
             <div className="lifecycle-track">
               {[
-                { emoji: '🌱', label: 'Start',     sub: '1 session'   },
-                { emoji: '🌿', label: 'Growing',   sub: '5 sessions'  },
-                { emoji: '🌲', label: 'Thriving',  sub: '10 sessions' },
-                { emoji: '🌳', label: 'Blooming',  sub: '15 sessions' },
+                { img: '/plants/seed.png',      label: 'Start',    sub: '1 session'   },
+                { img: '/plants/leafy.png',     label: 'Growing',  sub: '5 sessions'  },
+                { img: '/plants/flowering.png', label: 'Thriving', sub: '10 sessions' },
+                { img: '/plants/bloom.png',     label: 'Blooming', sub: '15 sessions' },
               ].map((stage, i) => (
                 <div key={i} className={`lc-stage lc-s${i}`}>
-                  <div className="lc-plant">{stage.emoji}</div>
+                  <div className="lc-plant">
+                    <img src={stage.img} alt={stage.label} className="lc-plant-img" />
+                  </div>
                   <span className="lc-label">{stage.label}</span>
                   <span className="lc-sub">{stage.sub}</span>
                 </div>
