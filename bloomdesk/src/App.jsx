@@ -15,6 +15,8 @@ const INITIAL_STATE = {
   water: 0,
   sessions: 0,
   totalMinutes: 0,
+  dailyMinutes: 0,
+  dailyDate: null,
   unlockedPets: [],
   currentStreak: 0,
   longestStreak: 0,
@@ -34,6 +36,8 @@ function toDbRow(id, s) {
     id,
     sessions: s.sessions,
     total_minutes: s.totalMinutes,
+    daily_minutes: s.dailyMinutes,
+    daily_date: s.dailyDate,
     water: s.water,
     unlocked_pets: s.unlockedPets,
     current_streak: s.currentStreak,
@@ -48,6 +52,8 @@ function fromDbRow(row) {
     water: row.water,
     sessions: row.sessions,
     totalMinutes: row.total_minutes,
+    dailyMinutes: row.daily_minutes ?? 0,
+    dailyDate: row.daily_date ?? null,
     unlockedPets: row.unlocked_pets ?? [],
     currentStreak: row.current_streak,
     longestStreak: row.longest_streak,
@@ -134,9 +140,11 @@ export default function App() {
     setTimeout(() => setJustWatered(false), 1500)
 
     setState(prev => {
+      const today = localDate()
       const newWater = prev.water + 1
       const newSessions = prev.sessions + 1
       const newMinutes = prev.totalMinutes + minutes
+      const newDailyMinutes = prev.dailyDate === today ? prev.dailyMinutes + minutes : minutes
       const streak = calcStreak(prev)
 
       const newlyUnlocked = PET_ROSTER.filter(
@@ -157,6 +165,8 @@ export default function App() {
         water: newWater,
         sessions: newSessions,
         totalMinutes: newMinutes,
+        dailyMinutes: newDailyMinutes,
+        dailyDate: today,
         unlockedPets: [...prev.unlockedPets, ...newlyUnlocked.map(p => p.id)],
         ...streak,
       }
@@ -243,7 +253,7 @@ export default function App() {
           <Stats
             sessions={state.sessions}
             water={state.water}
-            totalMinutes={state.totalMinutes}
+            totalMinutes={state.dailyMinutes}
             nextPet={nextPet}
             currentStreak={state.currentStreak}
             longestStreak={state.longestStreak}
