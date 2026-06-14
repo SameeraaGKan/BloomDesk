@@ -18,6 +18,29 @@ A cozy garden-themed productivity app where every focus session waters your plan
 
 **Bloom Buddy** — An AI wellness companion (powered by Groq) that gives personalized break suggestions after each session and responds to freeform questions. Full multi-turn chat with conversation memory.
 
+## The Bloom Recovery Protocol
+
+When a focus session ends, BloomDesk automatically calculates a personalized break using a tiered algorithm grounded in three bodies of cognitive research:
+
+| Research Source | Principle |
+|---|---|
+| **Pomodoro Technique** (Francesco Cirillo) | 25 min focus → 5 min break; short bursts with fixed recovery |
+| **DeskTime 52/17 Study** | The most productive workers work 52 min then rest 17 — a ~33% recovery ratio |
+| **Ultradian Basic Rest-Activity Cycle** (Kleitman) | The brain naturally cycles in ~90-min waves; ignoring this degrades performance |
+
+These are blended into a single step function:
+
+| Focus session | Recommended break | Basis |
+|---|---|---|
+| ≤ 15 min | 3 min | ~20% recovery ratio |
+| 16 – 30 min | 5 min | Pomodoro (25:5) |
+| 31 – 52 min | 10 min | DeskTime blend |
+| 53 – 75 min | 15 min | DeskTime 52/17 |
+| 76 – 90 min | 20 min | Ultradian BRAC cycle |
+| > 90 min | 25 min | Extended deep-work recovery |
+
+When the timer reaches zero, BloomDesk switches to break mode, pre-fills the recommended duration, and shows the reasoning. You can start the break immediately, adjust the duration, or skip it.
+
 ## Stack
 
 - **React 19** + **Vite 8**
