@@ -100,7 +100,7 @@ export default function Timer({ onSessionComplete, onWorkingChange, onElapsedCha
   }
 
   function dismissSuggest() {
-    setBreakSuggest(null)
+    switchMode('work')
   }
 
   function reset() {
