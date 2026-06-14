@@ -11,12 +11,24 @@ const BREAK_PRESETS = [5, 10, 15, 20]
 const RADIUS = 72
 const CIRCUMFERENCE = 2 * Math.PI * RADIUS
 
+// Research-backed tiered algorithm:
+// Pomodoro 25:5, DeskTime 52:17, Ultradian 90-min BRAC cycle
+function calcBreak(focusMins) {
+  if (focusMins <= 15) return { mins: 3,  reason: '~20% of your session' }
+  if (focusMins <= 30) return { mins: 5,  reason: 'Pomodoro technique' }
+  if (focusMins <= 52) return { mins: 10, reason: '52/17 method (adapted)' }
+  if (focusMins <= 75) return { mins: 15, reason: 'DeskTime 52/17 research' }
+  if (focusMins <= 90) return { mins: 20, reason: 'ultradian rhythm (90-min cycle)' }
+  return                      { mins: 25, reason: 'extended deep-work recovery' }
+}
+
 export default function Timer({ onSessionComplete, onWorkingChange, onElapsedChange }) {
-  const [mode, setMode]           = useState('work')
-  const [duration, setDuration]   = useState(MODES.work.defaultMins * 60)
-  const [secondsLeft, setSeconds] = useState(MODES.work.defaultMins * 60)
-  const [running, setRunning]     = useState(false)
-  const [customVal, setCustomVal] = useState('')
+  const [mode, setMode]               = useState('work')
+  const [duration, setDuration]       = useState(MODES.work.defaultMins * 60)
+  const [secondsLeft, setSeconds]     = useState(MODES.work.defaultMins * 60)
+  const [running, setRunning]         = useState(false)
+  const [customVal, setCustomVal]     = useState('')
+  const [breakSuggest, setBreakSuggest] = useState(null) // { mins, reason }
   const intervalRef = useRef(null)
 
   useEffect(() => {
@@ -34,7 +46,16 @@ export default function Timer({ onSessionComplete, onWorkingChange, onElapsedCha
         if (s <= 1) {
           clearInterval(intervalRef.current)
           setRunning(false)
-          if (mode === 'work') onSessionComplete(Math.round(duration / 60))
+          if (mode === 'work') {
+            const focusMins = Math.round(duration / 60)
+            onSessionComplete(focusMins)
+            const suggestion = calcBreak(focusMins)
+            const breakSecs = suggestion.mins * 60
+            setMode('break')
+            setDuration(breakSecs)
+            setBreakSuggest(suggestion)
+            return breakSecs
+          }
           return 0
         }
         return s - 1
@@ -46,6 +67,7 @@ export default function Timer({ onSessionComplete, onWorkingChange, onElapsedCha
   function switchMode(m) {
     clearInterval(intervalRef.current)
     setRunning(false)
+    setBreakSuggest(null)
     setMode(m)
     const secs = MODES[m].defaultMins * 60
     setDuration(secs)
@@ -67,11 +89,24 @@ export default function Timer({ onSessionComplete, onWorkingChange, onElapsedCha
     applyPreset(m)
   }
 
-  function toggleRun() { setRunning(r => !r) }
+  function toggleRun() {
+    setBreakSuggest(null)
+    setRunning(r => !r)
+  }
+
+  function startSuggestedBreak() {
+    setBreakSuggest(null)
+    setRunning(true)
+  }
+
+  function dismissSuggest() {
+    setBreakSuggest(null)
+  }
 
   function reset() {
     clearInterval(intervalRef.current)
     setRunning(false)
+    setBreakSuggest(null)
     setSeconds(duration)
   }
 
@@ -120,40 +155,60 @@ export default function Timer({ onSessionComplete, onWorkingChange, onElapsedCha
         </div>
       </div>
 
-      <div className="timer-controls">
-        <button className="btn-primary" onClick={toggleRun} style={{ background: color }}>
-          {running ? '⏸ Pause' : hasStarted ? '▶ Resume' : '▶ Start'}
-        </button>
-        <button className="btn-ghost" onClick={reset} disabled={running}>↺</button>
-      </div>
-
-      {!running && (
-        <div className="duration-picker">
-          <span className="picker-label">Duration</span>
-          <div className="picker-row">
-            {presets.map(m => (
-              <button
-                key={m}
-                className={`preset-btn ${currentMins === m ? 'active' : ''}`}
-                style={currentMins === m ? { background: color, color: '#fff', borderColor: color } : {}}
-                onClick={() => applyPreset(m)}
-              >
-                {m}m
-              </button>
-            ))}
-            <input
-              className="custom-min-input"
-              type="number"
-              min="1"
-              max="180"
-              placeholder="?"
-              value={customVal}
-              onChange={e => setCustomVal(e.target.value)}
-              onKeyDown={e => e.key === 'Enter' && applyCustom(e.target.value)}
-              onBlur={e => applyCustom(e.target.value)}
-            />
+      {breakSuggest ? (
+        <div className="break-suggest">
+          <p className="break-suggest-title">Session complete!</p>
+          <p className="break-suggest-mins">{breakSuggest.mins} min break</p>
+          <p className="break-suggest-reason">{breakSuggest.reason}</p>
+          <div className="break-suggest-actions">
+            <button
+              className="btn-primary small"
+              onClick={startSuggestedBreak}
+              style={{ background: MODES.break.color }}
+            >
+              Start break
+            </button>
+            <button className="break-skip" onClick={dismissSuggest}>skip</button>
           </div>
         </div>
+      ) : (
+        <>
+          <div className="timer-controls">
+            <button className="btn-primary" onClick={toggleRun} style={{ background: color }}>
+              {running ? '⏸ Pause' : hasStarted ? '▶ Resume' : '▶ Start'}
+            </button>
+            <button className="btn-ghost" onClick={reset} disabled={running}>↺</button>
+          </div>
+
+          {!running && (
+            <div className="duration-picker">
+              <span className="picker-label">Duration</span>
+              <div className="picker-row">
+                {presets.map(m => (
+                  <button
+                    key={m}
+                    className={`preset-btn ${currentMins === m ? 'active' : ''}`}
+                    style={currentMins === m ? { background: color, color: '#fff', borderColor: color } : {}}
+                    onClick={() => applyPreset(m)}
+                  >
+                    {m}m
+                  </button>
+                ))}
+                <input
+                  className="custom-min-input"
+                  type="number"
+                  min="1"
+                  max="180"
+                  placeholder="?"
+                  value={customVal}
+                  onChange={e => setCustomVal(e.target.value)}
+                  onKeyDown={e => e.key === 'Enter' && applyCustom(e.target.value)}
+                  onBlur={e => applyCustom(e.target.value)}
+                />
+              </div>
+            </div>
+          )}
+        </>
       )}
     </div>
   )
