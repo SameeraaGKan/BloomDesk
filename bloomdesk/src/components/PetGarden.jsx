@@ -1,17 +1,11 @@
 import { useState, useEffect, useRef } from 'react'
 
-import frogImg   from '../assets/frog.png'
-import catImg    from '../assets/cat.png'
-import bunnyImg  from '../assets/bunny.png'
-import goatImg   from '../assets/goat.png'
-import turtleImg from '../assets/turtle.png'
-
 const PET_IMAGES = {
-  frog:   frogImg,
-  cat:    catImg,
-  bunny:  bunnyImg,
-  goat:   goatImg,
-  turtle: turtleImg,
+  frog:   '/pets/frog.png',
+  cat:    '/pets/cat.png',
+  bunny:  '/pets/bunny.png',
+  goat:   '/pets/goat.png',
+  turtle: '/pets/turtle.png',
 }
 
 const PET_STATS = {
