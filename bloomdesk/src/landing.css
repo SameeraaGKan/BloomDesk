@@ -275,10 +275,10 @@
 .lc-s3 .lc-plant { animation-duration: 4.8s; animation-delay: -0.5s;
   filter: drop-shadow(0 0 32px rgba(90, 158, 111, 0.75)); }
 
-.lc-s0 .lc-plant-img { width: 3.5rem;  height: 3.5rem;  }
-.lc-s1 .lc-plant-img { width: 5rem;    height: 5rem;    }
-.lc-s2 .lc-plant-img { width: 7rem;    height: 7rem;    }
-.lc-s3 .lc-plant-img { width: 9.5rem;  height: 9.5rem;  }
+.lc-s0 .lc-plant-img { width: 6rem;    height: 6rem;    }
+.lc-s1 .lc-plant-img { width: 8.5rem;  height: 8.5rem;  }
+.lc-s2 .lc-plant-img { width: 11rem;   height: 11rem;   }
+.lc-s3 .lc-plant-img { width: 14rem;   height: 14rem;   }
 
 @keyframes lc-bob {
   0%, 100% { transform: translateY(0px); }
