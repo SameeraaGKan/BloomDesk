@@ -13,6 +13,7 @@ import './App.css'
 
 const INITIAL_STATE = {
   water: 0,
+  dailyWater: 0,
   sessions: 0,
   totalMinutes: 0,
   dailyMinutes: 0,
@@ -39,6 +40,7 @@ function toDbRow(id, s) {
     daily_minutes: s.dailyMinutes,
     daily_date: s.dailyDate,
     water: s.water,
+    daily_water: s.dailyWater,
     unlocked_pets: s.unlockedPets,
     current_streak: s.currentStreak,
     longest_streak: s.longestStreak,
@@ -54,6 +56,7 @@ function fromDbRow(row) {
     totalMinutes: row.total_minutes,
     dailyMinutes: row.daily_minutes ?? 0,
     dailyDate: row.daily_date ?? null,
+    dailyWater: row.daily_water ?? 0,
     unlockedPets: row.unlocked_pets ?? [],
     currentStreak: row.current_streak,
     longestStreak: row.longest_streak,
@@ -145,6 +148,7 @@ export default function App() {
       const newSessions = prev.sessions + 1
       const newMinutes = prev.totalMinutes + minutes
       const newDailyMinutes = prev.dailyDate === today ? prev.dailyMinutes + minutes : minutes
+      const newDailyWater   = prev.dailyDate === today ? prev.dailyWater + 1 : 1
       const streak = calcStreak(prev)
 
       const newlyUnlocked = PET_ROSTER.filter(
@@ -163,6 +167,7 @@ export default function App() {
       const next = {
         ...prev,
         water: newWater,
+        dailyWater: newDailyWater,
         sessions: newSessions,
         totalMinutes: newMinutes,
         dailyMinutes: newDailyMinutes,
@@ -252,7 +257,7 @@ export default function App() {
         <section className="cell-stats">
           <Stats
             sessions={state.sessions}
-            water={state.water}
+            water={state.dailyWater}
             totalMinutes={state.dailyMinutes}
             nextPet={nextPet}
             currentStreak={state.currentStreak}
