@@ -82,6 +82,16 @@ export default function App() {
   const [justWatered, setJustWatered] = useState(false)
   const [justFinished, setJustFinished] = useState(0)
   const notifTimer = useRef(null)
+  const [theme, setTheme] = useState(() => localStorage.getItem('bd-theme') || 'dark')
+
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme
+    localStorage.setItem('bd-theme', theme)
+  }, [theme])
+
+  function toggleTheme() {
+    setTheme(t => t === 'dark' ? 'light' : 'dark')
+  }
 
   // Load stats from Supabase on mount
   useEffect(() => {
@@ -184,6 +194,13 @@ export default function App() {
                 🔥 {state.currentStreak}
               </div>
             )}
+            <button
+              className="theme-toggle"
+              onClick={toggleTheme}
+              title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+            >
+              {theme === 'dark' ? '☀️' : '🌙'}
+            </button>
             <button className="sign-out-btn" onClick={handleSignOut}>Sign out</button>
           </div>
         </div>
