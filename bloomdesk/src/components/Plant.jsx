@@ -1,10 +1,10 @@
 const STAGES = [
-  { min: 0,  emoji: '🌰', name: 'Seed',        sub: 'Complete a session to sprout!' },
-  { min: 1,  emoji: '🌱', name: 'Sprout',       sub: 'Something tiny is growing...' },
-  { min: 3,  emoji: '🌿', name: 'Leafy',        sub: 'Leaves unfurling nicely!' },
-  { min: 6,  emoji: '🪴', name: 'Potted',       sub: 'Growing proud in its pot!' },
-  { min: 10, emoji: '🌸', name: 'Flowering',    sub: 'Beautiful blooms appearing!' },
-  { min: 15, emoji: '🌺', name: 'Full Bloom',   sub: 'Your garden is magnificent!' },
+  { min: 0,  img: '/plants/seed.png',      name: 'Seed',        sub: 'Complete a session to sprout!' },
+  { min: 1,  img: '/plants/sprout.png',    name: 'Sprout',      sub: 'Something tiny is growing...' },
+  { min: 3,  img: '/plants/leafy.png',     name: 'Leafy',       sub: 'Leaves unfurling nicely!' },
+  { min: 6,  img: '/plants/potted.png',    name: 'Potted',      sub: 'Growing proud in its pot!' },
+  { min: 10, img: '/plants/flowering.png', name: 'Flowering',   sub: 'Beautiful blooms appearing!' },
+  { min: 15, img: '/plants/bloom.png',     name: 'Full Bloom',  sub: 'Your garden is magnificent!' },
 ]
 
 const STAGE_GLOW = [
@@ -32,7 +32,7 @@ export default function Plant({ water, justWatered }) {
           style={{ background: `radial-gradient(circle, ${STAGE_GLOW[stageIdx]} 0%, transparent 68%)` }}
         />
         <div className={`plant-emoji-wrap ${justWatered ? 'watered' : ''}`}>
-          <div className="plant-emoji">{stage.emoji}</div>
+          <img src={stage.img} alt={stage.name} className="plant-img" />
           {justWatered && <div className="water-splash">💧💧💧</div>}
         </div>
       </div>
@@ -49,7 +49,7 @@ export default function Plant({ water, justWatered }) {
             className={`stage-dot${i < stageIdx ? ' done' : ''}${i === stageIdx ? ' current' : ''}`}
             title={s.name}
           >
-            {s.emoji}
+            <img src={s.img} alt={s.name} className="stage-dot-img" />
           </div>
         ))}
       </div>
@@ -60,7 +60,7 @@ export default function Plant({ water, justWatered }) {
             <div className="prog-fill" style={{ width: `${pct}%` }} />
           </div>
           <span className="prog-label">
-            {water} / {nextStage.min} 💧 &rarr; {nextStage.emoji} {nextStage.name}
+            {water} / {nextStage.min} 💧 &rarr; {nextStage.name}
           </span>
         </div>
       ) : (
