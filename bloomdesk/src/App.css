@@ -425,8 +425,8 @@
 }
 
 .plant-img {
-  width: 7rem;
-  height: 7rem;
+  width: 10rem;
+  height: 10rem;
   object-fit: contain;
   display: block;
   animation: sway 5s ease-in-out infinite;
