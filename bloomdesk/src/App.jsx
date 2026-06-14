@@ -25,8 +25,8 @@ export const PET_ROSTER = [
   { id: 'frog',    name: 'Froggo',   emoji: '🐸', threshold: 1,  mood: ['😊','😴','🎉'], desc: 'Loves rainy days' },
   { id: 'cat',     name: 'Mochi',    emoji: '🐱', threshold: 3,  mood: ['😸','😻','🐾'], desc: 'Naps professionally' },
   { id: 'bunny',   name: 'Bun Bun',  emoji: '🐰', threshold: 6,  mood: ['🥕','💨','✨'], desc: 'Extremely fluffy' },
-  { id: 'penguin', name: 'Pebble',   emoji: '🐧', threshold: 10, mood: ['🐟','❄️','🎵'], desc: 'Formal but fun' },
-  { id: 'dragon',  name: 'Ember',    emoji: '🐲', threshold: 15, mood: ['🔥','💎','⚡'], desc: 'Ancient garden spirit' },
+  { id: 'goat',   name: 'Cosmo',   emoji: '🐐', threshold: 10, mood: ['🏔️','💪','⭐'], desc: 'Climbs every deadline' },
+  { id: 'turtle', name: 'Sheldon', emoji: '🐢', threshold: 15, mood: ['🏠','📚','🌿'], desc: 'Slow and steady wins' },
 ]
 
 function toDbRow(id, s) {
@@ -256,6 +256,7 @@ export default function App() {
             unlockedIds={state.unlockedPets}
             sessions={state.sessions}
             isWorking={isWorking}
+            onNotify={showNotif}
           />
         </section>
       </main>

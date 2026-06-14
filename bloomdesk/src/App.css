@@ -567,6 +567,7 @@
 }
 
 .pet-slot {
+  position: relative;
   border-radius: 16px;
   padding: 12px 6px;
   text-align: center;
@@ -584,7 +585,7 @@
   box-shadow: 0 6px 20px rgba(90, 158, 111, 0.2);
 }
 
-.pet-slot.unlocked.happy .pet-emoji {
+.pet-bounce {
   animation: bounce 0.55s ease infinite alternate;
 }
 
@@ -621,6 +622,197 @@
 .locked-name {
   font-size: 0.65rem;
   color: rgba(200, 230, 210, 0.4);
+}
+
+/* ── Pet Images ──────────────────────────────── */
+.pet-img {
+  display: block;
+  width: 56px;
+  height: 56px;
+  object-fit: contain;
+  margin: 0 auto 5px;
+  filter: drop-shadow(0 2px 8px rgba(0,0,0,0.35));
+}
+
+.cursor-active {
+  border-color: var(--green) !important;
+  box-shadow: 0 0 14px rgba(90,158,111,0.45);
+}
+
+.cursor-hint {
+  display: block;
+  font-size: 0.55rem;
+  color: var(--green);
+  font-weight: 700;
+  margin-top: 2px;
+}
+
+.cursor-pet {
+  position: fixed;
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+  pointer-events: none;
+  z-index: 9999;
+  filter: drop-shadow(0 0 8px rgba(90,158,111,0.7));
+  transform: translateY(-50%);
+}
+
+/* ── Pet Modal ───────────────────────────────── */
+.pet-modal {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: 210px;
+  background: rgba(6, 16, 10, 0.97);
+  border: 1.5px solid rgba(90, 158, 111, 0.45);
+  border-radius: 16px;
+  padding: 14px;
+  z-index: 200;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.7), 0 0 24px rgba(90,158,111,0.1);
+  backdrop-filter: blur(16px);
+  pointer-events: none;
+  animation: modal-pop 0.15s ease-out;
+}
+
+/* align left/right for edge columns */
+.pet-slot:nth-child(3n+1) .pet-modal { left: 0;    transform: none; }
+.pet-slot:nth-child(3n)   .pet-modal { left: auto; right: 0; transform: none; }
+
+@keyframes modal-pop {
+  from { opacity: 0; transform: translateX(-50%) translateY(6px); }
+  to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+.pet-modal-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(90,158,111,0.2);
+}
+
+.pet-modal-img {
+  width: 46px;
+  height: 46px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 6px rgba(90,158,111,0.4));
+}
+
+.pet-modal-name {
+  font-size: 0.9rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #5a9e6f, #86efac);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: 0.06em;
+  line-height: 1;
+  margin-bottom: 3px;
+}
+
+.pet-modal-level {
+  font-size: 0.62rem;
+  color: rgba(134, 239, 172, 0.6);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.pet-modal-xp-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.pet-modal-xp-label {
+  font-size: 0.58rem;
+  font-weight: 700;
+  color: rgba(200,230,210,0.45);
+  width: 16px;
+}
+
+.pet-modal-xp-bar {
+  flex: 1;
+  height: 4px;
+  background: rgba(255,255,255,0.07);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.pet-modal-xp-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #3d8b57, #86efac);
+  border-radius: 2px;
+}
+
+.pet-modal-xp-pct {
+  font-size: 0.56rem;
+  color: rgba(200,230,210,0.45);
+  width: 26px;
+  text-align: right;
+}
+
+.pet-modal-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 10px;
+}
+
+.pet-modal-stat {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.pet-modal-stat-label {
+  font-size: 0.56rem;
+  color: rgba(200,230,210,0.5);
+  width: 64px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  flex-shrink: 0;
+}
+
+.pet-modal-stat-bar {
+  flex: 1;
+  height: 5px;
+  background: rgba(255,255,255,0.07);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.pet-modal-stat-fill {
+  height: 100%;
+  border-radius: 3px;
+  background: linear-gradient(90deg, #3d8b57, #5a9e6f, #86efac);
+}
+
+.pet-modal-stat-val {
+  font-size: 0.58rem;
+  font-weight: 700;
+  color: #86efac;
+  width: 20px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.pet-modal-quote {
+  font-size: 0.62rem;
+  color: rgba(200,230,210,0.4);
+  font-style: italic;
+  text-align: center;
+  margin-bottom: 5px;
+  line-height: 1.4;
+}
+
+.pet-modal-hint {
+  font-size: 0.54rem;
+  color: rgba(90,158,111,0.5);
+  text-align: center;
 }
 
 /* ── Stats ───────────────────────────────────── */
@@ -1131,6 +1323,33 @@
   -webkit-background-clip: text;
   background-clip: text;
 }
+
+[data-theme="light"] .pet-modal {
+  background: rgba(235, 250, 240, 0.98);
+  border-color: rgba(61, 139, 87, 0.35);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.12), 0 0 20px rgba(61,139,87,0.08);
+}
+
+[data-theme="light"] .pet-modal-header { border-bottom-color: rgba(0,0,0,0.08); }
+
+[data-theme="light"] .pet-modal-name {
+  background: linear-gradient(135deg, #2d7a4a, #3d8b57);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+[data-theme="light"] .pet-modal-level  { color: rgba(45,122,74,0.65); }
+
+[data-theme="light"] .pet-modal-xp-bar,
+[data-theme="light"] .pet-modal-stat-bar { background: rgba(0,0,0,0.08); }
+
+[data-theme="light"] .pet-modal-xp-label,
+[data-theme="light"] .pet-modal-xp-pct   { color: rgba(35,80,52,0.5); }
+
+[data-theme="light"] .pet-modal-stat-label { color: rgba(35,80,52,0.55); }
+[data-theme="light"] .pet-modal-stat-val   { color: #2d7a4a; }
+[data-theme="light"] .pet-modal-quote      { color: rgba(35,80,52,0.45); }
+[data-theme="light"] .pet-modal-hint       { color: rgba(61,139,87,0.5); }
 
 [data-theme="light"] .firefly {
   background: #ffffff;
