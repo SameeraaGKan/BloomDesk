@@ -32,7 +32,7 @@ const PET_MESSAGES = {
   cat:    ['🐱 Mochi says: focus first, nap later.', "🐱 You're purr-fectly productive!", '🐱 Time to stretch? Mochi thinks so.'],
   bunny:  ['🐰 Bun Bun is cheering for you!! 🥕', '🐰 Three sessions?? Legendary!!', "🐰 Keep hopping, you've got this!"],
   goat:   ['🐐 Cosmo says: climb every deadline!', "🐐 Nothing's too steep for you.", '🐐 Mountain goat energy — keep pushing!'],
-  turtle: ['🐢 Sheldon here. Slow and steady wins.', '🐢 Your consistency is genuinely impressive.', '🐢 Take breaks too. Even turtles rest. 🏠'],
+  turtle: ['🐢 Floaty here. Slow and steady wins.', '🐢 Your consistency is genuinely impressive.', '🐢 Take breaks too. Even turtles rest. 🏠'],
 }
 
 function petLevel(sessions) { return Math.min(10, Math.floor(sessions / 5) + 1) }

@@ -26,7 +26,7 @@ export const PET_ROSTER = [
   { id: 'cat',     name: 'Mochi',    emoji: '🐱', threshold: 3,  mood: ['😸','😻','🐾'], desc: 'Naps professionally' },
   { id: 'bunny',   name: 'Bun Bun',  emoji: '🐰', threshold: 6,  mood: ['🥕','💨','✨'], desc: 'Extremely fluffy' },
   { id: 'goat',   name: 'Cosmo',   emoji: '🐐', threshold: 10, mood: ['🏔️','💪','⭐'], desc: 'Climbs every deadline' },
-  { id: 'turtle', name: 'Sheldon', emoji: '🐢', threshold: 15, mood: ['🏠','📚','🌿'], desc: 'Slow and steady wins' },
+  { id: 'turtle', name: 'Floaty', emoji: '🐢', threshold: 15, mood: ['🏠','📚','🌿'], desc: 'Slow and steady wins' },
 ]
 
 function toDbRow(id, s) {
