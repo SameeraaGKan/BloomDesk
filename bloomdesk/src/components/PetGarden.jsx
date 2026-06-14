@@ -9,7 +9,7 @@ const PET_IMAGES = {
 }
 
 // CSS bob speed per pet (animation-duration)
-const BOB_SPEED = { frog: '0.8s', cat: '1.1s', bunny: '0.52s', goat: '0.75s', turtle: '1.6s' }
+const BOB_SPEED = { frog: '2.2s', cat: '2.8s', bunny: '1.6s', goat: '2.0s', turtle: '3.5s' }
 
 const PET_STATS = {
   frog:   [['Focus Power', 60], ['Cheer', 80], ['Rest Skill', 40], ['Energy', 70], ['Bond', 90]],

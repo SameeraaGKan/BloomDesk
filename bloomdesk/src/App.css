@@ -641,7 +641,7 @@
   flex-direction: column-reverse;
   align-items: center;
   z-index: 10;
-  animation: scene-bob 1s ease-in-out infinite;
+  animation: scene-bob 2s ease-in-out infinite;
 }
 
 .scene-card-name {
@@ -654,7 +654,7 @@
 
 @keyframes scene-bob {
   0%, 100% { transform: translateX(-50%) translateY(0); }
-  50%       { transform: translateX(-50%) translateY(-5px); }
+  50%       { transform: translateX(-50%) translateY(-2px); }
 }
 
 .pet-scene-card.cursor-active {
