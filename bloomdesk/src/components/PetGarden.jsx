@@ -96,7 +96,7 @@ export default function PetGarden({ allPets, unlockedIds, sessions, isWorking, o
                 <div className="scene-card-grass" />
                 <div
                   className="scene-card-pet"
-                  style={{ animationDuration: isWorking ? '0.38s' : BOB_SPEED[pet.id], animationDelay: `${i * 0.12}s` }}
+                  style={{ animationDelay: `${i * 0.4}s` }}
                 >
                   <img src={PET_IMAGES[pet.id]} alt={pet.name} className="pet-img" />
                   <span className="scene-card-name">{pet.name}</span>

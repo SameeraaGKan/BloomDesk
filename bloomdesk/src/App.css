@@ -583,34 +583,15 @@
   overflow: visible;
   cursor: pointer;
   user-select: none;
-  background: linear-gradient(
-    180deg,
-    rgba(3,10,6,0.96)  0%,
-    rgba(7,22,13,0.93) 40%,
-    rgba(24,62,34,0.98) 63%,
-    rgba(15,42,23,1)   100%
-  );
-  border: 1px solid rgba(255,255,255,0.07);
+  background: rgba(10, 28, 16, 0.38);
+  border: 1px solid rgba(255,255,255,0.06);
   transition: border-color 0.2s, transform 0.15s;
 }
 
 .pet-scene-card:hover {
-  border-color: rgba(90,158,111,0.45);
-  transform: translateY(-2px);
+  border-color: rgba(90,158,111,0.35);
+  transform: translateY(-1px);
   z-index: 50;
-}
-
-/* Tree blob silhouettes */
-.pet-scene-card::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: 13px;
-  pointer-events: none;
-  z-index: 1;
-  background:
-    radial-gradient(ellipse 58% 82% at 12% 100%, rgba(4,15,8,0.98) 0%, transparent 60%),
-    radial-gradient(ellipse 58% 82% at 88% 100%, rgba(4,15,8,0.98) 0%, transparent 60%);
 }
 
 /* Grass glow line */
@@ -641,7 +622,11 @@
   flex-direction: column-reverse;
   align-items: center;
   z-index: 10;
-  animation: scene-bob 2s ease-in-out infinite;
+  animation: scene-idle 4s ease-in-out infinite;
+}
+
+.pet-scene-card:hover .scene-card-pet {
+  animation: scene-bob 0.7s ease-in-out infinite;
 }
 
 .scene-card-name {
@@ -652,9 +637,14 @@
   margin-bottom: 2px;
 }
 
+@keyframes scene-idle {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50%       { transform: translateX(-50%) translateY(-0.8px); }
+}
+
 @keyframes scene-bob {
   0%, 100% { transform: translateX(-50%) translateY(0); }
-  50%       { transform: translateX(-50%) translateY(-2px); }
+  50%       { transform: translateX(-50%) translateY(-5px); }
 }
 
 .pet-scene-card.cursor-active {
@@ -685,7 +675,7 @@
 }
 
 .scene-locked-pet {
-  animation: scene-bob 2.8s ease-in-out infinite !important;
+  animation: scene-idle 5s ease-in-out infinite !important;
 }
 
 .scene-locked-pet .pet-img {
